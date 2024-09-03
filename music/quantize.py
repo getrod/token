@@ -92,12 +92,13 @@ def quantize_midi_notes(midi_notes, quantize_ticks, max_note_ticks):
         ))
     return quantized_notes
 
+DURATION_UNITS_PER_QUARTER_NOTE = 4 # 1 quarter note = 4 duration units
 
 def process_midi(input_file, output_file):
     midi = mido.MidiFile(input_file)
     
     TICKS_PER_BEAT = get_ticks_per_beat(midi)
-    QUANTIZE_TICKS = TICKS_PER_BEAT // 4  # 16th note quantization
+    QUANTIZE_TICKS = TICKS_PER_BEAT // DURATION_UNITS_PER_QUARTER_NOTE  # 16th note quantization
     MAX_NOTE_TICKS = TICKS_PER_BEAT * 16  # 16 quarter notes
 
     new_midi = mido.MidiFile()

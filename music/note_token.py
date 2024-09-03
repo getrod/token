@@ -1,11 +1,11 @@
 import mido
-from quantize import process_midi, MidiNote, get_ticks_per_beat, absolute_to_midi_notes, delta_to_absolute, temp_file_name
-import tempfile
+from quantize import process_midi, MidiNote, get_ticks_per_beat, absolute_to_midi_notes, delta_to_absolute, temp_file_name, midi_notes_to_absolute, absolute_to_delta, DURATION_UNITS_PER_QUARTER_NOTE
 import os
+
 
 def midi_note_to_token(midi_note: MidiNote, tick_per_duration_unit: int):
     '''
-    Converts Midi notes into n_<note number>_<duration> format
+    Converts Midi notes into note tokens: n_<note number>_<duration> 
     '''
     return f"n_{midi_note.note}_{midi_note.duration // tick_per_duration_unit}"
 
@@ -18,26 +18,21 @@ def chord_to_tokens(chord: list[MidiNote], tick_per_duration_unit: int):
 
 
 def midi_to_note_sequence(midi_file):
-    # # Create a temporary file for the quantized MIDI
-    # with tempfile.NamedTemporaryFile(suffix='.mid', delete=False) as temp_file:
-    #     temp_file_path = temp_file.name
-
-    temp_file = temp_file_name(midi_file, "temp")
-
     # Quantize the MIDI file
+    temp_file = temp_file_name(midi_file, "temp")
     process_midi(midi_file, temp_file)
 
     # Read the quantized MIDI file
     midi = mido.MidiFile(temp_file)
     
     TICKS_PER_BEAT = get_ticks_per_beat(midi)
-    TICKS_PER_DURATION_UNIT = TICKS_PER_BEAT // 4  # 1 quarter note = 4 duration units
+    TICKS_PER_DURATION_UNIT = TICKS_PER_BEAT // DURATION_UNITS_PER_QUARTER_NOTE
 
     note_sequence = []
     current_chord = []
     last_note_end = 0
 
-    for track in midi.tracks:
+    for track in midi.tracks: #TODO: might be an issue if multiple tracks
         absolute_messages = delta_to_absolute(track)
         midi_notes = absolute_to_midi_notes(absolute_messages)
         midi_notes.sort(key=lambda x: (x.start_time, -x.note))  # Sort by start time, then by note (higher first)
@@ -59,16 +54,13 @@ def midi_to_note_sequence(midi_file):
                 note_sequence.append(chord_to_tokens(current_chord, TICKS_PER_DURATION_UNIT))
                 current_chord = []
 
-            # Add note to chord
+            # Add note to current chord
             current_chord.append(note)
             last_note_end = max(last_note_end, note.start_time + note.duration)
 
     # Add any remaining notes
     if current_chord:
         note_sequence.append(chord_to_tokens(current_chord, TICKS_PER_DURATION_UNIT))
-
-    # # Clean up the temporary file
-    # os.unlink(temp_file_path)
 
     return note_sequence
 
@@ -85,6 +77,45 @@ def format_note_sequence(note_sequence):
     formatted += "]"
     return formatted
 
+def note_sequence_to_midi(note_sequence, output_file, ticks_per_beat=480, default_velocity=64):
+    def token_to_midi_note(token, start_time):
+        parts = token.split('_')
+        note = int(parts[1])
+        duration = int(parts[2]) * (ticks_per_beat // DURATION_UNITS_PER_QUARTER_NOTE)
+        return MidiNote(
+            note=note,
+            start_time=start_time,
+            velocity=default_velocity,
+            duration=duration,
+            _note_on_msg=mido.Message('note_on', note=note, velocity=default_velocity),
+            _note_off_msg=mido.Message('note_off', note=note, velocity=default_velocity)
+        )
+
+    midi_notes = []
+    current_time = 0
+
+    for chord in note_sequence:
+        if chord[0].startswith('n_r'):  # Rest
+            rest_duration = int(chord[0].split('_')[2]) * (ticks_per_beat // DURATION_UNITS_PER_QUARTER_NOTE)
+            current_time += rest_duration
+        else:
+            chord_notes = [token_to_midi_note(token, current_time) for token in chord]
+            midi_notes.extend(chord_notes)
+            current_time += max(note.duration for note in chord_notes)
+
+    absolute_messages = midi_notes_to_absolute(midi_notes)
+    delta_messages = absolute_to_delta(absolute_messages)
+
+    midi = mido.MidiFile(ticks_per_beat=ticks_per_beat)
+    track = mido.MidiTrack()
+    midi.tracks.append(track)
+
+    for msg in delta_messages:
+        track.append(msg)
+
+    midi.save(output_file)
+    print(f"MIDI file saved as: {output_file}")
+
 def main():
     input_file = input("Enter the path to your MIDI file: ").strip()
     
@@ -100,46 +131,11 @@ def main():
     print("\nNote Sequence:")
     print(formatted_sequence)
 
-    # # Optionally, save to a file
-    # output_file = input("Enter a file name to save the note sequence (or press Enter to skip): ").strip()
-    # if output_file:
-    #     with open(output_file, 'w') as f:
-    #         f.write(formatted_sequence)
-    #     print(f"Note sequence saved to {output_file}")
+    # Optionally, save to a file
+    output_file = input("Convert note sequence to midi? (or press Enter to skip): ").strip()
+    if output_file:
+        note_sequence_to_midi(note_sequence, 'note_sequence.mid')
+        print(f"Note sequence saved.")
 
 if __name__ == "__main__":
     main()
-
-
-'''
-Using the program written above, write a new program `note_tokens.py` that uses `quantize.py` above that converts the midi file into the following note sequence syntax:
-
-```
-note: n_<note number>_<duration>
-rest: n_r_<duration>
-(1 quarter note = 4 duration units)
-
-note sequence syntax:
-[ [n_r_<duration>] or [ (n_<note number>_<duration>)*] ] (* meaning many)
-
-note sequence example:
-[
-    [n_60_4], 
-    [
-        n_67_8,
-        n_64_4,
-        n_60_8
-    ],
-    [n_64_6],
-    [n_r_4],
-    [
-        n_67_8,
-        n_64_4,
-        n_60_8
-    ],
-    [n_64_6],
-]
-
-note sequence is of type list[list[str]]
-```
-'''
