@@ -2,6 +2,7 @@ import mido
 import os
 from dataclasses import dataclass
 from typing import List, Optional
+from collections import defaultdict
 
 @dataclass
 class MidiNote:
@@ -48,15 +49,36 @@ def absolute_to_delta(absolute_messages: list[MidiMessage]):
         prev_time = midi_msg.time
     return delta_messages
 
-def absolute_to_midi_notes(absolute_messages):
+def absolute_to_midi_notes(absolute_messages) -> list[MidiNote]:
     midi_notes = []
     active_notes = {}
+    skip_note_off = defaultdict(int)
 
     for midi_msg in absolute_messages:
         if midi_msg.msg.type == 'note_on' and midi_msg.msg.velocity > 0:
+            # if another 'note_on' without a 'note_off', add midi note
+            if midi_msg.msg.note in active_notes.keys():
+                start_time, note_on_msg = active_notes[midi_msg.msg.note]
+                midi_notes.append(MidiNote(
+                    note=midi_msg.msg.note,
+                    start_time=start_time,
+                    velocity=note_on_msg.velocity,
+                    duration=midi_msg.time - start_time,
+                    _note_on_msg=note_on_msg,
+                    _note_off_msg=mido.Message(
+                        'note_off', 
+                        channel=note_on_msg.channel, 
+                        note=note_on_msg.note, 
+                        velocity=64, 
+                    )
+                ))
+                skip_note_off[midi_msg.msg.note] += 1
             active_notes[midi_msg.msg.note] = (midi_msg.time, midi_msg.msg)
         elif midi_msg.msg.type == 'note_off' or (midi_msg.msg.type == 'note_on' and midi_msg.msg.velocity == 0):
-            if midi_msg.msg.note in active_notes:
+            # this if is to deal with overlapping notes in fl studio
+            if midi_msg.msg.note in skip_note_off and skip_note_off[midi_msg.msg.note] > 0:
+                skip_note_off[midi_msg.msg.note] -= 1
+            elif midi_msg.msg.note in active_notes:
                 start_time, note_on_msg = active_notes[midi_msg.msg.note]
                 midi_notes.append(MidiNote(
                     note=midi_msg.msg.note,
