@@ -78,6 +78,7 @@ def absolute_to_midi_notes(absolute_messages) -> list[MidiNote]:
             # this if is to deal with overlapping notes in fl studio
             if midi_msg.msg.note in skip_note_off and skip_note_off[midi_msg.msg.note] > 0:
                 skip_note_off[midi_msg.msg.note] -= 1
+            # this part of the if is what normally happens
             elif midi_msg.msg.note in active_notes:
                 start_time, note_on_msg = active_notes[midi_msg.msg.note]
                 midi_notes.append(MidiNote(
@@ -116,7 +117,7 @@ def quantize_midi_notes(midi_notes, quantize_ticks, max_note_ticks):
 
 DURATION_UNITS_PER_QUARTER_NOTE = 4 # 1 quarter note = 4 duration units
 
-def process_midi(input_file, output_file):
+def quantize_midi(input_file, output_file):
     midi = mido.MidiFile(input_file)
     
     TICKS_PER_BEAT = get_ticks_per_beat(midi)
@@ -164,7 +165,7 @@ def main():
     file_name, file_extension = os.path.splitext(input_file)
     output_file = f"{file_name}_quantized_limited{file_extension}"
 
-    process_midi(input_file, output_file)
+    quantize_midi(input_file, output_file)
 
 if __name__ == "__main__":
     main()
