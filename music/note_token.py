@@ -65,7 +65,7 @@ def notes_to_note_sequence(midi_notes: list[MidiNote], ticks_per_beat: int):
     current_chord = []
     last_note_end = 0
 
-    # midi_notes.sort(key=lambda x: (x.start_time, -x.note))  # Sort by start time, then by note (higher first)
+    # clip overlapping chords 
     midi_notes = overlap_clip_notes(midi_notes)
 
     for note in midi_notes:
@@ -104,46 +104,13 @@ def midi_to_note_sequence(midi_file):
     # Read the quantized MIDI file
     midi = mido.MidiFile(temp_file)
     
+    # create note sequence
     TICKS_PER_BEAT = get_ticks_per_beat(midi)
-    # TICKS_PER_DURATION_UNIT = TICKS_PER_BEAT // DURATION_UNITS_PER_QUARTER_NOTE
-
     note_sequence = []
-    # current_chord = []
-    # last_note_end = 0
-
     for track in midi.tracks: #TODO: might be an issue if multiple tracks
         absolute_messages = delta_to_absolute(track)
         midi_notes = absolute_to_midi_notes(absolute_messages)
-
         note_sequence += notes_to_note_sequence(midi_notes=midi_notes, ticks_per_beat=TICKS_PER_BEAT)
-
-
-        # midi_notes.sort(key=lambda x: (x.start_time, -x.note))  # Sort by start time, then by note (higher first)
-
-        # for note in midi_notes:
-        #     # Add rest if there's a gap
-        #     if note.start_time > last_note_end:
-        #         rest_duration = (note.start_time - last_note_end) // TICKS_PER_DURATION_UNIT
-
-        #         # If you found a rest, save the current chord and add the rest after it
-        #         if rest_duration > 0:
-        #             if current_chord:
-        #                 note_sequence.append(chord_to_tokens(current_chord, TICKS_PER_DURATION_UNIT))
-        #                 current_chord = []
-        #             note_sequence.append([f"n_r_{rest_duration}"])
-
-        #     # Start a new chord if this note starts after the previous chord
-        #     if current_chord and note.start_time > current_chord[0].start_time:
-        #         note_sequence.append(chord_to_tokens(current_chord, TICKS_PER_DURATION_UNIT))
-        #         current_chord = []
-
-        #     # Add note to current chord
-        #     current_chord.append(note)
-        #     last_note_end = max(last_note_end, note.start_time + note.duration)
-
-    # # Add any remaining notes
-    # if current_chord:
-    #     note_sequence.append(chord_to_tokens(current_chord, TICKS_PER_DURATION_UNIT))
 
     return note_sequence
 
