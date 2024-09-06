@@ -97,6 +97,9 @@ def notes_to_note_sequence(midi_notes: list[MidiNote], ticks_per_beat: int):
 
 
 def midi_to_note_sequence(midi_file):
+    '''
+    Convert midi file to note sequence (ie. [n_60_4], [n_67_4, n_64_3, n_60_4], [n_r_4], etc.)
+    '''
     # Quantize the MIDI file
     temp_file = temp_file_name(midi_file, "temp")
     quantize_midi(midi_file, temp_file)
