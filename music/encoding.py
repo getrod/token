@@ -1,5 +1,6 @@
 from collections import defaultdict
 import ast
+from dataclasses import dataclass
 
 def serialize(note_sequence: list[list[str]]) -> list[str]:
     '''
@@ -40,20 +41,32 @@ def replace_pair(tokens, pair, new_token):
         result.append(tokens[-1])
     return result
 
-def pair_frequency(tokens):
+def pair_frequency(tokens, separator):
     freq = defaultdict(int)
     for i in range(len(tokens) - 1):
         pair = (tokens[i], tokens[i+1])
-        freq[pair] += 1
+        if separator in pair: # Skip pairs that have separators
+            continue
+        else:
+            freq[pair] += 1
     return freq
 
-def generate_vocab_list(note_sequence_tokens: list[str], num_merges):
-    vocab_list = {char: [char] for char in set(note_sequence_tokens)}
+def generate_vocab_list(note_sequence_tokens: list[str], num_merges, vocab_list = None, separator = "|", token_count_start: int = 1):
+    '''
+    Generates vocab list.
+
+    If no vocab list provided, generate one from each element of note_sequence
+
+    returns vocab_list, tokens, freq
+    '''
+    if vocab_list == None:
+        vocab_list = {char: [char] for char in set(note_sequence_tokens)}
     tokens = note_sequence_tokens
-    token_count = 1
+    token_count = token_count_start
+    tok_freq = {}
     
     for _ in range(num_merges):
-        freq = pair_frequency(tokens)
+        freq = pair_frequency(tokens, separator)
         if not freq:
             break
         most_frequent_pair = max(freq, key=freq.get)
@@ -63,19 +76,20 @@ def generate_vocab_list(note_sequence_tokens: list[str], num_merges):
         new_tok = new_token(token_count)
         token_count += 1
         vocab_list[new_tok] = list(most_frequent_pair)
+        tok_freq[new_tok] = freq[most_frequent_pair]
         tokens = replace_pair(tokens, most_frequent_pair, new_tok)
-    return vocab_list
+    return vocab_list, tokens, tok_freq
 
-def expand_token(token):
+def expand_token(token, vocab_list):
     if len(vocab_list[token]) == 1:
         return vocab_list[token]
     else:
-        return expand_token(vocab_list[token][0]) + expand_token(vocab_list[token][1])
+        return expand_token(vocab_list[token][0], vocab_list) + expand_token(vocab_list[token][1], vocab_list)
         
 def detokenize(vocab_list, sort = True):
     expanded_tokens = set()
     for token in vocab_list:
-        expanded = ','.join(expand_token(token))
+        expanded = ','.join(expand_token(token, vocab_list))
         expanded_tokens.add(expanded)
     
     if sort:
