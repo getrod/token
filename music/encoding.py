@@ -66,13 +66,13 @@ def generate_vocab_list(note_sequence_tokens: list[str], num_merges):
         tokens = replace_pair(tokens, most_frequent_pair, new_tok)
     return vocab_list
 
+def expand_token(token):
+    if len(vocab_list[token]) == 1:
+        return vocab_list[token]
+    else:
+        return expand_token(vocab_list[token][0]) + expand_token(vocab_list[token][1])
+        
 def detokenize(vocab_list, sort = True):
-    def expand_token(token):
-        if len(vocab_list[token]) == 1:
-            return vocab_list[token]
-        else:
-            return expand_token(vocab_list[token][0]) + expand_token(vocab_list[token][1])
-    
     expanded_tokens = set()
     for token in vocab_list:
         expanded = ','.join(expand_token(token))

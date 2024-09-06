@@ -96,16 +96,21 @@ def notes_to_note_sequence(midi_notes: list[MidiNote], ticks_per_beat: int):
     return note_sequence
 
 
-def midi_to_note_sequence(midi_file):
+def midi_to_note_sequence(midi_file, quantize_midi_file_name: str = None):
     '''
     Convert midi file to note sequence (ie. [n_60_4], [n_67_4, n_64_3, n_60_4], [n_r_4], etc.)
+
+    quantize_midi_file_name : if not None, save quantized file to path specified by this param
     '''
     # Quantize the MIDI file
-    temp_file = temp_file_name(midi_file, "temp")
-    quantize_midi(midi_file, temp_file)
+    file_name = temp_file_name(midi_file, "temp")
+    if quantize_midi_file_name:
+        file_name = quantize_midi_file_name
+        
+    quantize_midi(midi_file, file_name)
 
     # Read the quantized MIDI file
-    midi = mido.MidiFile(temp_file)
+    midi = mido.MidiFile(file_name)
     
     # create note sequence
     TICKS_PER_BEAT = get_ticks_per_beat(midi)
