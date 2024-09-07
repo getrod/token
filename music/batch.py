@@ -16,25 +16,29 @@ def preprocess_midi(midi_dir, processed_midi_dir = "processed_midi"):
 
     # For each midi file in directory
     for filename in os.listdir(midi_dir):
-        if filename.endswith(".mid") or filename.endswith(".midi"):
-            midi_path = os.path.join(midi_dir, filename)
-            midi_name = os.path.splitext(filename)[0]
-            
-            # Create a new directory in output directory with name <midi_file_name>
-            midi_output_dir = os.path.join(output_dir, midi_name)
-            os.makedirs(midi_output_dir, exist_ok=True)
+        try: 
+            if filename.endswith(".mid") or filename.endswith(".midi"):
+                midi_path = os.path.join(midi_dir, filename)
+                midi_name = os.path.splitext(filename)[0]
+                
+                # Create a new directory in output directory with name <midi_file_name>
+                midi_output_dir = os.path.join(output_dir, midi_name)
+                os.makedirs(midi_output_dir, exist_ok=True)
 
-            # Create <midi_file_name>_quantized.mid file by calling quantize_midi
-            # Convert <midi_file_name> into note sequence tokens
-            quantized_midi_path = os.path.join(midi_output_dir, f"{midi_name}_quantized.mid")
-            note_sequence = midi_to_note_sequence(midi_path, quantize_midi_file_name=quantized_midi_path)
+                # Create <midi_file_name>_quantized.mid file by calling quantize_midi
+                # Convert <midi_file_name> into note sequence tokens
+                quantized_midi_path = os.path.join(midi_output_dir, f"{midi_name}_quantized.mid")
+                note_sequence = midi_to_note_sequence(midi_path, quantize_midi_file_name=quantized_midi_path)
 
-            # Save note sequence tokens in <midi_file_name>_seq.json
-            seq_json_path = os.path.join(midi_output_dir, f"{midi_name}_seq.json")
-            with open(seq_json_path, 'w') as f:
-                json.dump({"seq": str(note_sequence)}, f, indent=2)
+                # Save note sequence tokens in <midi_file_name>_seq.json
+                seq_json_path = os.path.join(midi_output_dir, f"{midi_name}_seq.json")
+                with open(seq_json_path, 'w') as f:
+                    json.dump({"seq": str(note_sequence)}, f, indent=2)
 
-            print(f"Processed {filename}")
+                print(f"Processed {filename}")
+        except:
+            print(f'Skipping: {filename}')
+            pass
 
     print("Preprocessing complete.")
 
@@ -83,7 +87,7 @@ def create_all_note_sequence_tokens(processed_midi_dir, separator="|"):
 
     return all_note_sequence_tokens
 
-def batch_generate_vocab_list(all_note_sequence_tokens: list[str], num_merges, save_every_n_merges: int = 20, separator = "|"):
+def batch_generate_vocab_list(all_note_sequence_tokens: list[str], num_merges, save_every_n_merges: int = 20, separator = "|", tokens_dir = "tokens"):
     '''
     Generates vocabulary list in batches and saves intermediate results.
 
@@ -101,9 +105,8 @@ def batch_generate_vocab_list(all_note_sequence_tokens: list[str], num_merges, s
     freq = {}
 
     # Create tokens directory if it doesn't exist
-    os.makedirs('tokens', exist_ok=True)
+    os.makedirs(tokens_dir, exist_ok=True)
 
-    print(all_note_sequence_tokens)
     for merge_count in range(1, num_merges + 1):
         new_vocab, all_note_sequence_tokens, new_freq = generate_vocab_list(
             all_note_sequence_tokens, 
@@ -119,11 +122,7 @@ def batch_generate_vocab_list(all_note_sequence_tokens: list[str], num_merges, s
         freq.update(new_freq)
         token_count += 1
 
-        print(all_note_sequence_tokens)
-        print(freq)
-
         if merge_count % save_every_n_merges == 0:
-            print(vocab_list)
             save_vocab(vocab_list, freq, merge_count)
 
     
@@ -132,7 +131,7 @@ def batch_generate_vocab_list(all_note_sequence_tokens: list[str], num_merges, s
 
     return vocab_list
 
-def save_vocab(vocab_list, freq, merge_count):
+def save_vocab(vocab_list, freq, merge_count, tokens_dir = "tokens"):
     output = {}
     for token, expansion in vocab_list.items():
         if token.startswith('t_'):
@@ -145,7 +144,7 @@ def save_vocab(vocab_list, freq, merge_count):
                 "seq_len": len(seq)
             }
 
-    filename = f'tokens/tokens_{merge_count}.json'
+    filename = f'{tokens_dir}/tokens_{merge_count}.json'
     with open(filename, 'w') as f:
         json.dump(output, f, indent=2)
     print(f"Saved vocabulary at {merge_count} merges to {filename}")
@@ -162,39 +161,17 @@ def main():
     #     return
     # preprocess_midi(midi_dir)
 
-    # processed_midi_dir = "./processed_midi"  # Replace with your actual directory path
-    # tokens = create_all_note_sequence_tokens(processed_midi_dir)
+    processed_midi_dir = "./processed_midi"  # Replace with your actual directory path
+    tokens = create_all_note_sequence_tokens(processed_midi_dir)
     # print(f"Total tokens: {len(tokens)}")
     # print(f"First few tokens: {tokens[:10]}")
     # print(f"Last few tokens: {tokens[-10:]}")
 
     # Test batch_generate_vocab_list
-    all_tokens = ["['n_60_4']", "['n_62_4']", "['n_64_4', 'n_67_4']", "['n_r_4']", "['n_69_8']", "|",
-                  "['n_60_4']", "['n_62_4']", "['n_64_4', 'n_67_4']", "['n_r_4']", "['n_69_8']"]
-    final_vocab = batch_generate_vocab_list(all_tokens, num_merges=40, save_every_n_merges=20)
+    # all_tokens = ["['n_60_4']", "['n_62_4']", "['n_64_4', 'n_67_4']", "['n_r_4']", "['n_69_8']", "|",
+    #               "['n_60_4']", "['n_62_4']", "['n_64_4', 'n_67_4']", "['n_r_4']", "['n_69_8']"]
+    final_vocab = batch_generate_vocab_list(tokens, num_merges=300, save_every_n_merges=20)
     print("Final vocabulary size:", len(final_vocab))
 
 if __name__ == "__main__":
     main()
-    
-
-
-# Implement the following function:
-
-# ```
-# def preprocess_midi():
-#     # get directory that has all midi files
-
-#     # create output directory for processed midi data
-
-#     # for each midi file in directory 
-#         # create a new directory in output directory with name <midi_file_name>. Create the following files in this directory
-#             # create <midi_file_name>_quantized.mid file by calling quantize_midi
-#             # get convert <midi_file_name> into note sequence tokens and save them in <midi_file_name>_seq.json
-#                 # midi_file_name>_seq.json has the following format:
-#                 '''
-#                 {
-#                     "seq": "[['n_60_4'], ['n_62_4'], ['n_64_4', 'n_67_4'], ['n_r_4'], ['n_69_8']]" // str(note_sequence)
-#                 }
-#                 '''
-# ```
