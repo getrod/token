@@ -64,6 +64,28 @@ def compare_images_piece_by_piece(image_a, image_b):
     
     return result_map
 
+def structure_similarity(image_a, image_b):
+    '''
+    Given binary images A & B, this method finds internal pattern similarity
+    '''
+    arr_a = np.array(image_a)
+    arr_b = np.array(image_b)
+    
+    if arr_a.shape != arr_b.shape:
+        raise ValueError("Images must have the same dimensions")
+    
+    match_normal = {}
+    match_flip = {}
+    match_normal = compare_images_piece_by_piece(arr_a, arr_b)
+    match_flip = compare_images_piece_by_piece(arr_b, arr_a)
+
+    match_score = 0
+    for weight, match in list(match_normal.items()) + list(match_flip.items()):
+        match_score = max(match * weight, match_score)
+    
+    return match_score
+    
+
 # Example usage for 8x4 images (as in the given example)
 def example_8x4():
     # Create 8x4 binary images
@@ -81,12 +103,16 @@ def example_8x4():
         [0, 0, 0, 0, 1, 1, 1, 1]
     ], dtype=np.uint8) * 255)
 
-    match = calculate_image_match(A, B)
-    print(f"Difference percentage for 8x4 images: {match:.2f}%")
-    result = compare_images_piece_by_piece(A, B)
-    print("Result map for 8x4 images:")
-    for percentage, match in result.items():
-        print(f"{percentage:.2f} -> {match:.3f}")
+    # match = calculate_image_match(A, B)
+    # print(f"Difference percentage for 8x4 images: {match:.2f}%")
+    # result = compare_images_piece_by_piece(A, B)
+    # print("Result map for 8x4 images:")
+    # for percentage, match in result.items():
+    #     print(f"{percentage:.2f} -> {match:.3f}")
+
+    structure_similar = structure_similarity(A, B)
+    print(structure_similar)
+
 
 # Example usage for 200x200 images
 def example_200x200():
