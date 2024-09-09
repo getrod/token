@@ -18,7 +18,7 @@ def main():
     # Display available tokens
     print("Available tokens:")
     for token in token_data.keys():
-        print(f"{token}: {token_data[token]['seq_len']} notes")
+        print(f"{token}: {token_data[token]['seq_len']} tokens freq: {token_data[token]['freq']}")
 
     # Specify which token to render
     token_to_render = input("Enter the token you want to render into MIDI: ").strip()
