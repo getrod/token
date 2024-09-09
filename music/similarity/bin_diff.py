@@ -23,7 +23,7 @@ Create two additional example usage programs of binary images with dimensions (2
 from PIL import Image
 import numpy as np
 
-def calculate_image_difference(image1, image2):
+def calculate_image_match(image1, image2):
     # Convert PIL images to numpy arrays
     arr1 = np.array(image1)
     arr2 = np.array(image2)
@@ -39,9 +39,30 @@ def calculate_image_difference(image1, image2):
     matching_pixels = np.sum(arr1 == arr2)
     
     # Calculate the percentage of matching pixels
-    match_percentage = (matching_pixels / total_pixels) * 100
+    match_percentage = (matching_pixels / total_pixels) 
     
     return match_percentage
+
+def compare_images_piece_by_piece(image_a, image_b):
+    arr_a = np.array(image_a)
+    arr_b = np.array(image_b)
+    
+    if arr_a.shape != arr_b.shape:
+        raise ValueError("Images must have the same dimensions")
+    
+    height, _ = arr_a.shape
+    result_map = {}
+    
+    for pixel_step in range(1, height + 1):
+        piece_a = arr_a[:pixel_step, :]
+        piece_b = arr_b[-pixel_step:, :]
+        
+        piece_percentage = pixel_step / height
+        piece_match = calculate_image_match(Image.fromarray(piece_a), Image.fromarray(piece_b))
+        
+        result_map[piece_percentage] = piece_match
+    
+    return result_map
 
 # Example usage for 8x4 images (as in the given example)
 def example_8x4():
@@ -60,8 +81,12 @@ def example_8x4():
         [0, 0, 0, 0, 1, 1, 1, 1]
     ], dtype=np.uint8) * 255)
 
-    difference = calculate_image_difference(A, B)
-    print(f"Difference percentage for 8x4 images: {difference:.2f}%")
+    match = calculate_image_match(A, B)
+    print(f"Difference percentage for 8x4 images: {match:.2f}%")
+    result = compare_images_piece_by_piece(A, B)
+    print("Result map for 8x4 images:")
+    for percentage, match in result.items():
+        print(f"{percentage:.2f} -> {match:.3f}")
 
 # Example usage for 200x200 images
 def example_200x200():
@@ -70,8 +95,16 @@ def example_200x200():
     A = Image.fromarray((np.random.rand(200, 200) > 0.5).astype(np.uint8) * 255)
     B = Image.fromarray((np.random.rand(200, 200) > 0.5).astype(np.uint8) * 255)
 
-    difference = calculate_image_difference(A, B)
-    print(f"Difference percentage for 200x200 images: {difference:.2f}%")
+    match = calculate_image_match(A, B)
+    print(f"Difference percentage for 200x200 images: {match:.2f}%")
+    result = compare_images_piece_by_piece(A, B)
+    print("\nResult map for 200x200 images (showing every 10th step):")
+    for i, (percentage, match) in enumerate(result.items()):
+        if i % 10 == 0:
+            print(f"{percentage:.2f} -> {match:.1f}")
+
+    
+
 
 # Example usage for 1920x1080 images
 def example_1920x1080():
@@ -80,8 +113,8 @@ def example_1920x1080():
     A = Image.fromarray((np.random.rand(1080, 1920) > 0.5).astype(np.uint8) * 255)
     B = Image.fromarray((np.random.rand(1080, 1920) > 0.5).astype(np.uint8) * 255)
 
-    difference = calculate_image_difference(A, B)
-    print(f"Difference percentage for 1920x1080 images: {difference:.2f}%")
+    match = calculate_image_match(A, B)
+    print(f"Difference percentage for 1920x1080 images: {match:.2f}%")
 
 if __name__ == "__main__":
     example_8x4()
