@@ -24,21 +24,36 @@ def calculate_image_match(image1, image2):
     but the last row of B only matches half of the last row of A (25% / 2). Combined together: 75% + (25% / 2) = 87.5%
     '''
     # Convert PIL images to numpy arrays
-    arr1 = np.array(image1)
-    arr2 = np.array(image2)
+    image_a = np.array(image1)
+    image_b = np.array(image2)
     
     # Ensure images have the same dimensions
-    if arr1.shape != arr2.shape:
+    if image_a.shape != image_b.shape:
         raise ValueError("Images must have the same dimensions")
     
-    # Calculate the total number of pixels
-    total_pixels = arr1.size
-    
-    # Calculate the number of matching pixels
-    matching_pixels = np.sum(arr1 == arr2)
+    # Calculate the number of matching pixels 
+    matching_black_pixels = np.sum(np.logical_and(image_a, image_b))
+
+    # Calculate the total number of "active" pixels in both images, choose the max
+    a_total_black_pixels = np.sum(image_a) / 255
+    b_total_black_pixels = np.sum(image_b) / 255
+    max_total_black_pixels = max(a_total_black_pixels, b_total_black_pixels)
+
+    print('image a')
+    print(image_a)
+    print('image b')
+    print(image_b)
+    print('matching_pixels_arr: ')
+    print(f'{image_a == image_b}')
+    print('matching_pixels_and_op: ')
+    print(f'{np.logical_and(image_a, image_b)}')
+    print(f'matching_black_pixels: {matching_black_pixels}')
+    print(f'max_total_black_pixels: {max_total_black_pixels}')
     
     # Calculate the percentage of matching pixels
-    match_percentage = (matching_pixels / total_pixels) 
+    if b_total_black_pixels == 0: return 0
+    match_percentage = (matching_black_pixels / max_total_black_pixels) 
+    print(f'match percent: {match_percentage}')
     
     return match_percentage
 
@@ -84,7 +99,7 @@ def structure_similarity(image_a, image_b):
 
     match_score = 0
     for weight, match in list(match_normal.items()) + list(match_flip.items()):
-        print(f"{weight:.2f} -> {match:.1f}: {match * weight}")
+        # print(f"{weight:.2f} -> {match:.1f}: {match * weight}")
         match_score = max(match * weight, match_score)
     
     return match_score
@@ -375,10 +390,10 @@ def main():
     print(f"\nResized Image B (width {target_width}):")
     print(resized_b)
 
-    save_binary_image(resized_a, "resized_image_a.png")
-    save_binary_image(resized_b, "resized_image_b.png")
-    compare_midi_usage_case()
-    compare_midi_dissimilar()
+    # save_binary_image(resized_a, "resized_image_a.png")
+    # save_binary_image(resized_b, "resized_image_b.png")
+    # compare_midi_usage_case()
+    # compare_midi_dissimilar()
 
 if __name__ == "__main__":
     main()

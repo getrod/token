@@ -1,6 +1,6 @@
 from PIL import Image
 import numpy as np
-from music.midi_similarity import structure_similarity, calculate_image_match, compare_images_piece_by_piece
+from midi_similarity import structure_similarity, calculate_image_match, compare_images_piece_by_piece
 
 # Example usage for 8x4 images (as in the given example)
 def example_8x4():
@@ -60,5 +60,5 @@ def example_1920x1080():
 
 if __name__ == "__main__":
     example_8x4()
-    example_200x200()
-    example_1920x1080()
+    # example_200x200()
+    # example_1920x1080()
