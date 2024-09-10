@@ -10,8 +10,8 @@ class MidiNote:
     start_time: int
     velocity: int
     duration: int
-    _note_on_msg: mido.Message
-    _note_off_msg: mido.Message
+    _note_on_msg: mido.Message = None
+    _note_off_msg: mido.Message = None
 
     def note_on_msg(self):
         return self._note_on_msg.copy(time=self.start_time)

@@ -95,6 +95,45 @@ def notes_to_note_sequence(midi_notes: list[MidiNote], ticks_per_beat: int):
     
     return note_sequence
 
+def note_sequence_to_notes(note_sequence, ticks_per_duration_unit: int = 1, default_velocity=100):
+    """
+    Converts a note sequence to a list of MidiNote objects.
+
+    Args:
+    note_sequence (list): A list of note tokens representing the sequence.
+    default_velocity (int): The default velocity for the notes.
+
+    Returns:
+    list: A list of MidiNote objects.
+    """
+    midi_notes = []
+    current_time = 0
+
+    for chord in note_sequence:
+        if chord[0].startswith('n_r'):  # Rest
+            rest_duration = int(chord[0].split('_')[2]) * ticks_per_duration_unit
+            current_time += rest_duration
+        else:
+            chord_duration = 0
+            for token in chord:
+                parts = token.split('_')
+                note = int(parts[1])
+                duration = int(parts[2]) * ticks_per_duration_unit
+                chord_duration = max(chord_duration, duration)
+                
+                midi_note = MidiNote(
+                    note=note,
+                    start_time=current_time,
+                    velocity=default_velocity,
+                    duration=duration,
+                    _note_on_msg=mido.Message('note_on', note=note, velocity=default_velocity),
+                    _note_off_msg=mido.Message('note_off', note=note, velocity=default_velocity)
+                )
+                midi_notes.append(midi_note)
+            
+            current_time += chord_duration
+
+    return midi_notes
 
 def midi_to_note_sequence(midi_file, quantize_midi_file_name: str = None):
     '''
