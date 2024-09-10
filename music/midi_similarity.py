@@ -35,25 +35,13 @@ def calculate_image_match(image1, image2):
     matching_black_pixels = np.sum(np.logical_and(image_a, image_b))
 
     # Calculate the total number of "active" pixels in both images, choose the max
-    a_total_black_pixels = np.sum(image_a) / 255
-    b_total_black_pixels = np.sum(image_b) / 255
+    a_total_black_pixels = np.sum(image_a) 
+    b_total_black_pixels = np.sum(image_b) 
     max_total_black_pixels = max(a_total_black_pixels, b_total_black_pixels)
-
-    print('image a')
-    print(image_a)
-    print('image b')
-    print(image_b)
-    print('matching_pixels_arr: ')
-    print(f'{image_a == image_b}')
-    print('matching_pixels_and_op: ')
-    print(f'{np.logical_and(image_a, image_b)}')
-    print(f'matching_black_pixels: {matching_black_pixels}')
-    print(f'max_total_black_pixels: {max_total_black_pixels}')
     
     # Calculate the percentage of matching pixels
-    if b_total_black_pixels == 0: return 0
+    if max_total_black_pixels == 0: return 0
     match_percentage = (matching_black_pixels / max_total_black_pixels) 
-    print(f'match percent: {match_percentage}')
     
     return match_percentage
 
@@ -312,7 +300,46 @@ def compare_midi_dissimilar():
         image = notes_to_binary_image(notes)
         save_binary_image(image, f"sequence_dissimilar_{i+1}.png")
         print(f"Saved visualization of dissimilar sequence {i+1} as sequence_dissimilar_{i+1}.png")
-    pass
+
+def compare_midi_similar():
+    # Note sequences with approximately 70-80% similarity
+    seq_similar_1 = [
+        ['n_60_4'],                  # C4 quarter note
+        ['n_62_4'],                  # D4 quarter note
+        ['n_64_4', 'n_67_4'],        # E4 and G4 quarter note chord
+        ['n_r_4'],                   # Quarter rest
+        ['n_69_8'],                  # A4 half note
+        ['n_67_4'],                  # G4 quarter note
+        ['n_65_4'],                  # F4 quarter note
+        ['n_64_4', 'n_60_4'],        # E4 and C4 quarter note chord
+        ['n_62_8'],                  # D4 half note
+        ['n_r_4']                    # Quarter rest
+    ]
+
+    seq_similar_2 = [
+        ['n_60_4'],                  # C4 quarter note (same as seq_similar_1)
+        ['n_62_4'],                  # D4 quarter note (same as seq_similar_1)
+        ['n_64_4', 'n_67_4'],        # E4 and G4 quarter note chord (same as seq_similar_1)
+        ['n_r_4'],                   # Quarter rest (same as seq_similar_1)
+        ['n_69_4'],                  # A4 quarter note (different duration from seq_similar_1)
+        ['n_71_4'],                  # B4 quarter note (new note)
+        ['n_72_8'],                  # C5 half note (new note)
+        ['n_67_4'],                  # G4 quarter note (same as seq_similar_1 but different position)
+        ['n_65_4'],                  # F4 quarter note (same as seq_similar_1 but different position)
+        ['n_64_4', 'n_60_4'],        # E4 and C4 quarter note chord (same as seq_similar_1 but different position)
+        ['n_r_4']                    # Quarter rest (same as seq_similar_1 but different position)
+    ]
+
+    # Compare sequences with intended 70-80% similarity
+    similarity_70_80 = compare_midi_sequences(seq_similar_1, seq_similar_2)
+    print(f"Similarity between sequences designed for 70-80% similarity: {similarity_70_80:.2f}")
+
+    # Visualize the sequences
+    for i, seq in enumerate([seq_similar_1, seq_similar_2]):
+        notes = note_sequence_to_notes(seq)
+        image = notes_to_binary_image(notes)
+        save_binary_image(image, f"sequence_similar_{i+1}.png")
+        print(f"Saved visualization of similar sequence {i+1} as sequence_similar_{i+1}.png")
 
 
 # Example usage
@@ -327,7 +354,7 @@ def main():
     print("Binary Image Representation:")
     print(binary_image)
     
-    save_binary_image(binary_image, "midi_visualization.png")
+    # save_binary_image(binary_image, "midi_visualization.png")
 
     # Example usage of make_same_height
     notes_a = [
@@ -358,8 +385,8 @@ def main():
     print("\nPadded Image B:")
     print(padded_b)
 
-    save_binary_image(padded_a, "padded_image_a.png")
-    save_binary_image(padded_b, "padded_image_b.png")
+    # save_binary_image(padded_a, "padded_image_a.png")
+    # save_binary_image(padded_b, "padded_image_b.png")
 
     # Example usage of make_same_width
     notes_a = [
@@ -392,8 +419,9 @@ def main():
 
     # save_binary_image(resized_a, "resized_image_a.png")
     # save_binary_image(resized_b, "resized_image_b.png")
-    # compare_midi_usage_case()
-    # compare_midi_dissimilar()
+    compare_midi_usage_case()
+    compare_midi_dissimilar()
+    compare_midi_similar()
 
 if __name__ == "__main__":
     main()
