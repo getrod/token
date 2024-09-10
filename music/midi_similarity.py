@@ -142,7 +142,7 @@ def save_binary_image(image, filename):
         return
 
     # Convert to PIL Image
-    pil_image = Image.fromarray(image * 255).convert('L')
+    pil_image = Image.fromarray(np.logical_not(image).astype(np.uint8) * 255).convert('L') # 'logical_not' for black notes
     
     # Save the image
     pil_image.save(filename)
