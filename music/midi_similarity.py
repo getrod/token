@@ -19,9 +19,6 @@ def calculate_image_match(image1, image2):
         1 1 1 1 0 0 0 0
         0 0 0 0 1 1 1 1
     ]
-
-    Their match percentage is 87.5%, since the top three rows of the image match (75%), 
-    but the last row of B only matches half of the last row of A (25% / 2). Combined together: 75% + (25% / 2) = 87.5%
     '''
     # Convert PIL images to numpy arrays
     image_a = np.array(image1)
@@ -31,15 +28,15 @@ def calculate_image_match(image1, image2):
     if image_a.shape != image_b.shape:
         raise ValueError("Images must have the same dimensions")
     
-    # Calculate the number of matching pixels 
+    # Calculate the number of black (1's) pixels 
     matching_black_pixels = np.sum(np.logical_and(image_a, image_b))
 
-    # Calculate the total number of "active" pixels in both images, choose the max
+    # Calculate the total number of black (1's) pixels in both images, choose the max
     a_total_black_pixels = np.sum(image_a) 
     b_total_black_pixels = np.sum(image_b) 
     max_total_black_pixels = max(a_total_black_pixels, b_total_black_pixels)
     
-    # Calculate the percentage of matching pixels
+    # Calculate the percentage of black pixels
     if max_total_black_pixels == 0: return 0
     match_percentage = (matching_black_pixels / max_total_black_pixels) 
     
@@ -48,7 +45,7 @@ def calculate_image_match(image1, image2):
 def compare_images_piece_by_piece(image_a, image_b):
     '''
     Given two binary PIL images, A & B as before, compare them piece by piece by comparing the top
-    subet of image A to the bottom subset of image B:
+    subet of image A to the bottom subset of image B
     '''
     arr_a = np.array(image_a)
     arr_b = np.array(image_b)

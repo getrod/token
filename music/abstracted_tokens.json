@@ -1,0 +1,1192 @@
+{
+  "r_1": {
+    "collective_freq": 13,
+    "tokens": [
+      "t_33"
+    ]
+  },
+  "r_2": {
+    "collective_freq": 3,
+    "tokens": [
+      "t_178"
+    ]
+  },
+  "r_3": {
+    "collective_freq": 3,
+    "tokens": [
+      "t_179"
+    ]
+  },
+  "r_4": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_232"
+    ]
+  },
+  "r_5": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_233"
+    ]
+  },
+  "r_6": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_231"
+    ]
+  },
+  "r_7": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_229"
+    ]
+  },
+  "r_8": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_230"
+    ]
+  },
+  "r_9": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_228"
+    ]
+  },
+  "r_10": {
+    "collective_freq": 16,
+    "tokens": [
+      "t_26"
+    ]
+  },
+  "r_11": {
+    "collective_freq": 7,
+    "tokens": [
+      "t_93"
+    ]
+  },
+  "r_12": {
+    "collective_freq": 16,
+    "tokens": [
+      "t_25"
+    ]
+  },
+  "r_13": {
+    "collective_freq": 7,
+    "tokens": [
+      "t_92"
+    ]
+  },
+  "r_14": {
+    "collective_freq": 19,
+    "tokens": [
+      "t_31",
+      "t_110"
+    ]
+  },
+  "r_15": {
+    "collective_freq": 6,
+    "tokens": [
+      "t_96"
+    ]
+  },
+  "r_16": {
+    "collective_freq": 16,
+    "tokens": [
+      "t_27"
+    ]
+  },
+  "r_17": {
+    "collective_freq": 16,
+    "tokens": [
+      "t_28"
+    ]
+  },
+  "r_18": {
+    "collective_freq": 3,
+    "tokens": [
+      "t_174"
+    ]
+  },
+  "r_19": {
+    "collective_freq": 10,
+    "tokens": [
+      "t_44"
+    ]
+  },
+  "r_20": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_225"
+    ]
+  },
+  "r_21": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_226"
+    ]
+  },
+  "r_22": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_224"
+    ]
+  },
+  "r_23": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_221"
+    ]
+  },
+  "r_24": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_222"
+    ]
+  },
+  "r_25": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_223"
+    ]
+  },
+  "r_26": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_220"
+    ]
+  },
+  "r_27": {
+    "collective_freq": 10,
+    "tokens": [
+      "t_138",
+      "t_170",
+      "t_171"
+    ]
+  },
+  "r_28": {
+    "collective_freq": 3,
+    "tokens": [
+      "t_172"
+    ]
+  },
+  "r_29": {
+    "collective_freq": 4,
+    "tokens": [
+      "t_151"
+    ]
+  },
+  "r_30": {
+    "collective_freq": 4,
+    "tokens": [
+      "t_152"
+    ]
+  },
+  "r_31": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_240"
+    ]
+  },
+  "r_32": {
+    "collective_freq": 6,
+    "tokens": [
+      "t_292",
+      "t_293",
+      "t_294"
+    ]
+  },
+  "r_33": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_291"
+    ]
+  },
+  "r_34": {
+    "collective_freq": 8,
+    "tokens": [
+      "t_287",
+      "t_288",
+      "t_289",
+      "t_290"
+    ]
+  },
+  "r_35": {
+    "collective_freq": 8,
+    "tokens": [
+      "t_283",
+      "t_284",
+      "t_285",
+      "t_286"
+    ]
+  },
+  "r_36": {
+    "collective_freq": 16,
+    "tokens": [
+      "t_46",
+      "t_280",
+      "t_281",
+      "t_282"
+    ]
+  },
+  "r_37": {
+    "collective_freq": 3,
+    "tokens": [
+      "t_183"
+    ]
+  },
+  "r_38": {
+    "collective_freq": 14,
+    "tokens": [
+      "t_32"
+    ]
+  },
+  "r_39": {
+    "collective_freq": 4,
+    "tokens": [
+      "t_164"
+    ]
+  },
+  "r_40": {
+    "collective_freq": 15,
+    "tokens": [
+      "t_37",
+      "t_276"
+    ]
+  },
+  "r_41": {
+    "collective_freq": 4,
+    "tokens": [
+      "t_163"
+    ]
+  },
+  "r_42": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_278"
+    ]
+  },
+  "r_43": {
+    "collective_freq": 24,
+    "tokens": [
+      "t_14"
+    ]
+  },
+  "r_44": {
+    "collective_freq": 18,
+    "tokens": [
+      "t_18"
+    ]
+  },
+  "r_45": {
+    "collective_freq": 4,
+    "tokens": [
+      "t_162"
+    ]
+  },
+  "r_46": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_277"
+    ]
+  },
+  "r_47": {
+    "collective_freq": 24,
+    "tokens": [
+      "t_13"
+    ]
+  },
+  "r_48": {
+    "collective_freq": 9,
+    "tokens": [
+      "t_112",
+      "t_155"
+    ]
+  },
+  "r_49": {
+    "collective_freq": 9,
+    "tokens": [
+      "t_115",
+      "t_158"
+    ]
+  },
+  "r_50": {
+    "collective_freq": 18,
+    "tokens": [
+      "t_113",
+      "t_114",
+      "t_156",
+      "t_157"
+    ]
+  },
+  "r_51": {
+    "collective_freq": 9,
+    "tokens": [
+      "t_116",
+      "t_159"
+    ]
+  },
+  "r_52": {
+    "collective_freq": 9,
+    "tokens": [
+      "t_117",
+      "t_160"
+    ]
+  },
+  "r_53": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_271"
+    ]
+  },
+  "r_54": {
+    "collective_freq": 4,
+    "tokens": [
+      "t_161"
+    ]
+  },
+  "r_55": {
+    "collective_freq": 10,
+    "tokens": [
+      "t_118",
+      "t_119"
+    ]
+  },
+  "r_56": {
+    "collective_freq": 4,
+    "tokens": [
+      "t_272",
+      "t_273"
+    ]
+  },
+  "r_57": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_274"
+    ]
+  },
+  "r_58": {
+    "collective_freq": 18,
+    "tokens": [
+      "t_53",
+      "t_54"
+    ]
+  },
+  "r_59": {
+    "collective_freq": 8,
+    "tokens": [
+      "t_71"
+    ]
+  },
+  "r_60": {
+    "collective_freq": 5,
+    "tokens": [
+      "t_109"
+    ]
+  },
+  "r_61": {
+    "collective_freq": 9,
+    "tokens": [
+      "t_51"
+    ]
+  },
+  "r_62": {
+    "collective_freq": 9,
+    "tokens": [
+      "t_52"
+    ]
+  },
+  "r_63": {
+    "collective_freq": 9,
+    "tokens": [
+      "t_49"
+    ]
+  },
+  "r_64": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_258"
+    ]
+  },
+  "r_65": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_259"
+    ]
+  },
+  "r_66": {
+    "collective_freq": 4,
+    "tokens": [
+      "t_261",
+      "t_262"
+    ]
+  },
+  "r_67": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_260"
+    ]
+  },
+  "r_68": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_263"
+    ]
+  },
+  "r_69": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_264"
+    ]
+  },
+  "r_70": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_265"
+    ]
+  },
+  "r_71": {
+    "collective_freq": 4,
+    "tokens": [
+      "t_251",
+      "t_252"
+    ]
+  },
+  "r_72": {
+    "collective_freq": 4,
+    "tokens": [
+      "t_253",
+      "t_254"
+    ]
+  },
+  "r_73": {
+    "collective_freq": 4,
+    "tokens": [
+      "t_256",
+      "t_257"
+    ]
+  },
+  "r_74": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_255"
+    ]
+  },
+  "r_75": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_266"
+    ]
+  },
+  "r_76": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_267"
+    ]
+  },
+  "r_77": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_268"
+    ]
+  },
+  "r_78": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_269"
+    ]
+  },
+  "r_79": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_295"
+    ]
+  },
+  "r_80": {
+    "collective_freq": 4,
+    "tokens": [
+      "t_130"
+    ]
+  },
+  "r_81": {
+    "collective_freq": 4,
+    "tokens": [
+      "t_131"
+    ]
+  },
+  "r_82": {
+    "collective_freq": 8,
+    "tokens": [
+      "t_72"
+    ]
+  },
+  "r_83": {
+    "collective_freq": 4,
+    "tokens": [
+      "t_144"
+    ]
+  },
+  "r_84": {
+    "collective_freq": 8,
+    "tokens": [
+      "t_145",
+      "t_146"
+    ]
+  },
+  "r_85": {
+    "collective_freq": 4,
+    "tokens": [
+      "t_147"
+    ]
+  },
+  "r_86": {
+    "collective_freq": 4,
+    "tokens": [
+      "t_136"
+    ]
+  },
+  "r_87": {
+    "collective_freq": 4,
+    "tokens": [
+      "t_137"
+    ]
+  },
+  "r_88": {
+    "collective_freq": 8,
+    "tokens": [
+      "t_132",
+      "t_133"
+    ]
+  },
+  "r_89": {
+    "collective_freq": 8,
+    "tokens": [
+      "t_134",
+      "t_135"
+    ]
+  },
+  "r_90": {
+    "collective_freq": 6,
+    "tokens": [
+      "t_180",
+      "t_181"
+    ]
+  },
+  "r_91": {
+    "collective_freq": 7,
+    "tokens": [
+      "t_91"
+    ]
+  },
+  "r_92": {
+    "collective_freq": 8,
+    "tokens": [
+      "t_149",
+      "t_150"
+    ]
+  },
+  "r_93": {
+    "collective_freq": 4,
+    "tokens": [
+      "t_143"
+    ]
+  },
+  "r_94": {
+    "collective_freq": 4,
+    "tokens": [
+      "t_148"
+    ]
+  },
+  "r_95": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_239"
+    ]
+  },
+  "r_96": {
+    "collective_freq": 23,
+    "tokens": [
+      "t_61",
+      "t_104",
+      "t_105",
+      "t_106"
+    ]
+  },
+  "r_97": {
+    "collective_freq": 18,
+    "tokens": [
+      "t_62",
+      "t_107",
+      "t_108"
+    ]
+  },
+  "r_98": {
+    "collective_freq": 25,
+    "tokens": [
+      "t_36",
+      "t_38"
+    ]
+  },
+  "r_99": {
+    "collective_freq": 29,
+    "tokens": [
+      "t_35",
+      "t_76",
+      "t_77"
+    ]
+  },
+  "r_100": {
+    "collective_freq": 28,
+    "tokens": [
+      "t_12",
+      "t_166"
+    ]
+  },
+  "r_101": {
+    "collective_freq": 37,
+    "tokens": [
+      "t_34",
+      "t_73",
+      "t_74",
+      "t_75"
+    ]
+  },
+  "r_102": {
+    "collective_freq": 4,
+    "tokens": [
+      "t_167"
+    ]
+  },
+  "r_103": {
+    "collective_freq": 3,
+    "tokens": [
+      "t_199"
+    ]
+  },
+  "r_104": {
+    "collective_freq": 3,
+    "tokens": [
+      "t_200"
+    ]
+  },
+  "r_105": {
+    "collective_freq": 42,
+    "tokens": [
+      "t_8",
+      "t_43",
+      "t_238"
+    ]
+  },
+  "r_106": {
+    "collective_freq": 92,
+    "tokens": [
+      "t_1",
+      "t_9"
+    ]
+  },
+  "r_107": {
+    "collective_freq": 47,
+    "tokens": [
+      "t_5",
+      "t_29"
+    ]
+  },
+  "r_108": {
+    "collective_freq": 43,
+    "tokens": [
+      "t_6",
+      "t_42"
+    ]
+  },
+  "r_109": {
+    "collective_freq": 16,
+    "tokens": [
+      "t_24"
+    ]
+  },
+  "r_110": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_237"
+    ]
+  },
+  "r_111": {
+    "collective_freq": 7,
+    "tokens": [
+      "t_90"
+    ]
+  },
+  "r_112": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_236"
+    ]
+  },
+  "r_113": {
+    "collective_freq": 16,
+    "tokens": [
+      "t_66",
+      "t_67"
+    ]
+  },
+  "r_114": {
+    "collective_freq": 16,
+    "tokens": [
+      "t_68",
+      "t_69"
+    ]
+  },
+  "r_115": {
+    "collective_freq": 7,
+    "tokens": [
+      "t_89"
+    ]
+  },
+  "r_116": {
+    "collective_freq": 4,
+    "tokens": [
+      "t_139"
+    ]
+  },
+  "r_117": {
+    "collective_freq": 8,
+    "tokens": [
+      "t_65"
+    ]
+  },
+  "r_118": {
+    "collective_freq": 6,
+    "tokens": [
+      "t_204",
+      "t_205"
+    ]
+  },
+  "r_119": {
+    "collective_freq": 8,
+    "tokens": [
+      "t_129",
+      "t_206"
+    ]
+  },
+  "r_120": {
+    "collective_freq": 6,
+    "tokens": [
+      "t_216",
+      "t_217",
+      "t_218"
+    ]
+  },
+  "r_121": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_219"
+    ]
+  },
+  "r_122": {
+    "collective_freq": 16,
+    "tokens": [
+      "t_83",
+      "t_84"
+    ]
+  },
+  "r_123": {
+    "collective_freq": 29,
+    "tokens": [
+      "t_85",
+      "t_86",
+      "t_87",
+      "t_120"
+    ]
+  },
+  "r_124": {
+    "collective_freq": 10,
+    "tokens": [
+      "t_45"
+    ]
+  },
+  "r_125": {
+    "collective_freq": 3,
+    "tokens": [
+      "t_184"
+    ]
+  },
+  "r_126": {
+    "collective_freq": 14,
+    "tokens": [
+      "t_55",
+      "t_182",
+      "t_279"
+    ]
+  },
+  "r_127": {
+    "collective_freq": 18,
+    "tokens": [
+      "t_192",
+      "t_193",
+      "t_194",
+      "t_195",
+      "t_196",
+      "t_197"
+    ]
+  },
+  "r_128": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_299"
+    ]
+  },
+  "r_129": {
+    "collective_freq": 6,
+    "tokens": [
+      "t_99"
+    ]
+  },
+  "r_130": {
+    "collective_freq": 10,
+    "tokens": [
+      "t_124",
+      "t_125"
+    ]
+  },
+  "r_131": {
+    "collective_freq": 15,
+    "tokens": [
+      "t_126",
+      "t_127",
+      "t_128"
+    ]
+  },
+  "r_132": {
+    "collective_freq": 6,
+    "tokens": [
+      "t_97"
+    ]
+  },
+  "r_133": {
+    "collective_freq": 10,
+    "tokens": [
+      "t_95",
+      "t_140"
+    ]
+  },
+  "r_134": {
+    "collective_freq": 8,
+    "tokens": [
+      "t_88"
+    ]
+  },
+  "r_135": {
+    "collective_freq": 12,
+    "tokens": [
+      "t_210",
+      "t_211",
+      "t_212",
+      "t_213",
+      "t_214",
+      "t_215"
+    ]
+  },
+  "r_136": {
+    "collective_freq": 72,
+    "tokens": [
+      "t_78",
+      "t_79",
+      "t_80",
+      "t_81",
+      "t_82",
+      "t_94",
+      "t_123",
+      "t_186",
+      "t_187",
+      "t_188",
+      "t_189",
+      "t_190",
+      "t_191",
+      "t_300"
+    ]
+  },
+  "r_137": {
+    "collective_freq": 5,
+    "tokens": [
+      "t_121"
+    ]
+  },
+  "r_138": {
+    "collective_freq": 6,
+    "tokens": [
+      "t_100"
+    ]
+  },
+  "r_139": {
+    "collective_freq": 6,
+    "tokens": [
+      "t_101"
+    ]
+  },
+  "r_140": {
+    "collective_freq": 6,
+    "tokens": [
+      "t_102"
+    ]
+  },
+  "r_141": {
+    "collective_freq": 47,
+    "tokens": [
+      "t_7",
+      "t_30"
+    ]
+  },
+  "r_142": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_270"
+    ]
+  },
+  "r_143": {
+    "collective_freq": 90,
+    "tokens": [
+      "t_2",
+      "t_10"
+    ]
+  },
+  "r_144": {
+    "collective_freq": 138,
+    "tokens": [
+      "t_3",
+      "t_4",
+      "t_16",
+      "t_17"
+    ]
+  },
+  "r_145": {
+    "collective_freq": 23,
+    "tokens": [
+      "t_21",
+      "t_175",
+      "t_241"
+    ]
+  },
+  "r_146": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_242"
+    ]
+  },
+  "r_147": {
+    "collective_freq": 4,
+    "tokens": [
+      "t_168"
+    ]
+  },
+  "r_148": {
+    "collective_freq": 3,
+    "tokens": [
+      "t_177"
+    ]
+  },
+  "r_149": {
+    "collective_freq": 3,
+    "tokens": [
+      "t_176"
+    ]
+  },
+  "r_150": {
+    "collective_freq": 4,
+    "tokens": [
+      "t_243",
+      "t_244"
+    ]
+  },
+  "r_151": {
+    "collective_freq": 63,
+    "tokens": [
+      "t_11",
+      "t_19",
+      "t_20",
+      "t_201"
+    ]
+  },
+  "r_152": {
+    "collective_freq": 11,
+    "tokens": [
+      "t_165",
+      "t_203",
+      "t_247",
+      "t_275"
+    ]
+  },
+  "r_153": {
+    "collective_freq": 3,
+    "tokens": [
+      "t_202"
+    ]
+  },
+  "r_154": {
+    "collective_freq": 11,
+    "tokens": [
+      "t_41"
+    ]
+  },
+  "r_155": {
+    "collective_freq": 8,
+    "tokens": [
+      "t_64"
+    ]
+  },
+  "r_156": {
+    "collective_freq": 22,
+    "tokens": [
+      "t_15"
+    ]
+  },
+  "r_157": {
+    "collective_freq": 11,
+    "tokens": [
+      "t_40"
+    ]
+  },
+  "r_158": {
+    "collective_freq": 29,
+    "tokens": [
+      "t_57",
+      "t_59",
+      "t_60",
+      "t_103"
+    ]
+  },
+  "r_159": {
+    "collective_freq": 16,
+    "tokens": [
+      "t_63",
+      "t_70"
+    ]
+  },
+  "r_160": {
+    "collective_freq": 29,
+    "tokens": [
+      "t_98",
+      "t_122",
+      "t_141",
+      "t_142",
+      "t_173",
+      "t_185",
+      "t_297",
+      "t_298"
+    ]
+  },
+  "r_161": {
+    "collective_freq": 36,
+    "tokens": [
+      "t_39",
+      "t_47",
+      "t_56",
+      "t_58"
+    ]
+  },
+  "r_162": {
+    "collective_freq": 37,
+    "tokens": [
+      "t_22",
+      "t_23",
+      "t_198"
+    ]
+  },
+  "r_163": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_207"
+    ]
+  },
+  "r_164": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_208"
+    ]
+  },
+  "r_165": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_209"
+    ]
+  },
+  "r_166": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_227"
+    ]
+  },
+  "r_167": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_296"
+    ]
+  },
+  "r_168": {
+    "collective_freq": 13,
+    "tokens": [
+      "t_111",
+      "t_153",
+      "t_154"
+    ]
+  },
+  "r_169": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_248"
+    ]
+  },
+  "r_170": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_249"
+    ]
+  },
+  "r_171": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_250"
+    ]
+  },
+  "r_172": {
+    "collective_freq": 9,
+    "tokens": [
+      "t_48"
+    ]
+  },
+  "r_173": {
+    "collective_freq": 9,
+    "tokens": [
+      "t_50"
+    ]
+  },
+  "r_174": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_245"
+    ]
+  },
+  "r_175": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_246"
+    ]
+  },
+  "r_176": {
+    "collective_freq": 3,
+    "tokens": [
+      "t_169"
+    ]
+  },
+  "r_177": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_234"
+    ]
+  },
+  "r_178": {
+    "collective_freq": 2,
+    "tokens": [
+      "t_235"
+    ]
+  }
+}
