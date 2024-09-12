@@ -8,3 +8,21 @@ Detokenized Set:
 ```
 
 Interesting observation about token_300.json. Around t_25 - t_100, a lot of repeating token pairs (ie. ['t_15', 't_15'])
+
+Main files:
+```
+copy_midi_files.py: copy files from "raw" midi directory to "clean" midi directory (for preprocessing purposes)
+preprocess_midi.py: Get midi files and tokenize all of them
+tokenize_midi.py: Tokenize preprocessed midi
+abstract_tokens.py: create abstracted tokens.json
+```
+
+Example usage of each:
+```
+
+python3 preprocess_midi.py "./aug_midi" "aug_midi_preprocessed"
+python3 tokenize_midi.py "./aug_midi_preprocessed" "aug_midi_tokens"
+python3 abstract_tokens.py "./aug_midi_tokens/tokens_311.json" "aug_midi_abstract"
+python3 token_cluster_stats.py '/Users/kevin/Downloads/adl-piano-midi-flatten_tokens_abstracted/similarity_matrix.npz'
+python3 render_abstract_tokens.py '/Users/kevin/dev/pair_encoding/music/aug_midi_abstract/abstracted_tokens.json' '/Users/kevin/dev/pair_encoding/music/aug_midi_tokens/tokens_311.json' './aug_midi_abstract_midi' 20 
+```

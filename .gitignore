@@ -1,3 +1,4 @@
 # Ignore all .mid and .midi files in all directories
 **/*.mid
 **/*.midi
+**/*.json

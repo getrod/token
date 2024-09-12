@@ -9,6 +9,9 @@ Finds all midi files in sub directory and copies them to the root of a new direc
 '''
 
 def copy_midi_files(source_dir, destination_dir):
+    '''
+    Finds all midi files in sub directory and copies them to the root of a new directory
+    '''
     # Create the destination directory if it doesn't exist
     if not os.path.exists(destination_dir):
         os.makedirs(destination_dir)

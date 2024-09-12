@@ -52,7 +52,7 @@ def create_all_note_sequence_tokens(processed_midi_dir, separator="|"):
     separator (str): Token used to separate different note sequences
     
     Returns:
-    list: A list of all note sequence tokens, including separators
+    list: A list of all note sequence string tokens, including separators
     '''
     all_note_sequence_tokens = []
 
@@ -87,7 +87,7 @@ def create_all_note_sequence_tokens(processed_midi_dir, separator="|"):
 
     return all_note_sequence_tokens
 
-def batch_generate_vocab_list(all_note_sequence_tokens: list[str], num_merges, save_every_n_merges: int = 20, separator = "|", tokens_dir = "tokens"):
+def batch_generate_vocab_list(all_note_sequence_tokens: list[str], num_merges, save_every_n_merges: int = 500, separator = "|", tokens_dir = "tokens"):
     '''
     Generates vocabulary list in batches and saves intermediate results.
 
@@ -150,7 +150,7 @@ def save_vocab(vocab_list, freq, merge_count, tokens_dir = "tokens"):
     print(f"Saved vocabulary at {merge_count} merges to {filename}")
 
 
-def batch_generate_vocab_list_progressive(all_note_sequence_tokens: list[str], num_merges, save_every_n_merges: int = 20, separator = "|", tokens_dir = "tokens"):
+def batch_generate_vocab_list_progressive(all_note_sequence_tokens: list[str], num_merges, save_every_n_merges: int = 500, separator = "|", tokens_dir = "tokens"):
     '''
     Generates vocabulary list in batches and saves intermediate results.
     Can resume from the last saved state.

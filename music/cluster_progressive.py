@@ -4,6 +4,7 @@ from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
 from scipy.spatial.distance import squareform
 import os
 import time
+from midi_similarity import compare_midi_sequences
 
 def load_tokens(json_file):
     with open(json_file, 'r') as f:
